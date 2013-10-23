@@ -3,19 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Tufão web framework</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <h1>Welcome to Tufão web page</h1>
-    <p>You may want to visit the
-      <a href="https://github.com/vinipsmaker/tufao">github project page</a> or
-    the <a href="ref">Tufão reference documentation</a></p>
 
-    <p>Below there is an IRC widget, if you want to talk to Tufão developers and
-      users:</p>
+    <ul id="navlist">
+      <li>
+        <a href="https://github.com/vinipsmaker/tufao">github project page</a>
+      </li>
+      <li><a href="ref" target="nav">Tufão reference documentation</a></li>
+      <li>
+        <a href="https://kiwiirc.com/client/irc.freenode.net/#tufao"
+           title="if you want to talk to Tufão developers and users"
+           target="nav">
+          IRC widget
+        </a>
+      </li>
+    </ul>
 
     <hr>
 
     <iframe src="https://kiwiirc.com/client/irc.freenode.net/#tufao"
-            style="border:0; width:100%; height:450px;"></iframe>
+            id="nav"></iframe>
   </body>
 </html>

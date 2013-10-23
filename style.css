@@ -1,0 +1,16 @@
+#navlist li
+{
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+#nav
+{
+    position: absolute;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    height: 75%;
+    bottom: 0;
+}
