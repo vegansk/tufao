@@ -3,6 +3,8 @@ var files =
     [ "abstracthttpserverrequesthandler.h", "abstracthttpserverrequesthandler_8h_source.html", null ],
     [ "abstracthttpupgradehandler.h", "abstracthttpupgradehandler_8h_source.html", null ],
     [ "abstractmessagesocket.h", "abstractmessagesocket_8h_source.html", null ],
+    [ "classhandler.h", "classhandler_8h_source.html", null ],
+    [ "classhandlermanager.h", "classhandlermanager_8h_source.html", null ],
     [ "headers.h", "headers_8h_source.html", null ],
     [ "httpfileserver.h", "httpfileserver_8h_source.html", null ],
     [ "httppluginserver.h", "httppluginserver_8h_source.html", null ],
