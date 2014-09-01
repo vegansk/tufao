@@ -10,7 +10,7 @@ configure_file(FindTufao.cmake.in FindTufao${TUFAO_VERSION_MAJOR}.cmake @ONLY)
 # Install info
 if(TUFAO_MKSPECS_MODULE_DIR)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tufao${TUFAO_VERSION_MAJOR}.prf"
-        DESTINATION "${TUFAO_MKSPECS_DIR}"
+        DESTINATION "${TUFAO_MKSPECS_MODULE_DIR}"
         COMPONENT development
     )
 else(TUFAO_MKSPECS_MODULE_DIR)
@@ -18,7 +18,7 @@ else(TUFAO_MKSPECS_MODULE_DIR)
         DESTINATION "${QT_MKSPECS_DIR}/features"
         COMPONENT development
     )
-endif(TUFAO_MKSPECS_MODILE_DIR)
+endif(TUFAO_MKSPECS_MODULE_DIR)
 
 if(PKG_CONFIG_FOUND)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tufao${TUFAO_VERSION_MAJOR}.pc"
