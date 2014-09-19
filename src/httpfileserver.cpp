@@ -96,8 +96,15 @@ namespace Tufao {
 
 HttpFileServer::HttpFileServer(const QString &dir, QObject *parent) :
     QObject(parent),
-    priv(new Priv(dir))
+    priv(new Priv(dir, ""))
 {
+}
+
+HttpFileServer::HttpFileServer(const QString &dir, const QString &path, QObject *parent) :
+    QObject(parent),
+    priv(new Priv(dir, path))
+{
+
 }
 
 HttpFileServer::~HttpFileServer()
@@ -337,28 +344,32 @@ void HttpFileServer::setBufferSize(qint64 size)
 }
 
 std::function<bool(HttpServerRequest&, HttpServerResponse&)>
-HttpFileServer::handler(const QString &rootDir)
+HttpFileServer::handler(const QString &rootDir, const QString &urlRootPath)
 {
     QString dir = rootDir;
-    return [dir](HttpServerRequest &request, HttpServerResponse &response) {
-        return handleRequest(request, response, dir);
+    QString urlPath = urlRootPath;
+    return [dir, urlPath](HttpServerRequest &request, HttpServerResponse &response) {
+        return handleRequest(request, response, dir, urlPath);
     };
 }
 
 bool HttpFileServer::handleRequest(HttpServerRequest &request,
                                    HttpServerResponse &response)
 {
-    return handleRequest(request, response, priv->rootDir);
+    return handleRequest(request, response, priv->rootDir, priv->rootPath);
 }
 
 inline bool HttpFileServer::handleRequest(HttpServerRequest &request,
                                           HttpServerResponse &response,
-                                          const QString &rootDir)
+                                          const QString &rootDir, const QString &urlRootPath)
 {
+    if(!request.url().path().startsWith(urlRootPath))
+        return false;
+
     QString fileName{
         QDir::cleanPath(rootDir
                         + QDir::toNativeSeparators(request.url()
-                                                   .path(QUrl::FullyDecoded)))};
+                                                   .path(QUrl::FullyDecoded).mid(urlRootPath.length())))};
     if (!fileName.startsWith(rootDir +
                              ((fileName.startsWith(':') || fileName.startsWith("qrc:"))
                              ? QChar('/')

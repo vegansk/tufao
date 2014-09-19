@@ -72,6 +72,17 @@ public:
     explicit HttpFileServer(const QString &dir, QObject *parent = 0);
 
     /*!
+      Constructs a HttpFileServer object.
+
+      \p parent is passed to the QObject constructor.
+
+      \p dir is used as root dir to serve files.
+
+      \p path is used as root path in url to serve files.
+      */
+    explicit HttpFileServer(const QString &dir, const QString &path, QObject *parent = 0);
+
+    /*!
       Destroys the object.
       */
     ~HttpFileServer();
@@ -140,7 +151,7 @@ public:
       1.0
      */
     static std::function<bool(HttpServerRequest&, HttpServerResponse&)>
-    handler(const QString &rootDir);
+    handler(const QString &rootDir, const QString &urlRootPath = "");
 
 public slots:
     /*!
@@ -160,7 +171,8 @@ public slots:
 private:
     static bool handleRequest(HttpServerRequest &request,
                               HttpServerResponse &response,
-                              const QString &rootDir);
+                              const QString &rootDir,
+                              const QString &urlRootPath);
 
     struct Priv;
     Priv *priv;
