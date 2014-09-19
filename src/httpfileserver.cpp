@@ -346,8 +346,8 @@ void HttpFileServer::setBufferSize(qint64 size)
 std::function<bool(HttpServerRequest&, HttpServerResponse&)>
 HttpFileServer::handler(const QString &rootDir, const QString &urlRootPath)
 {
-    QString dir = rootDir;
-    QString urlPath = urlRootPath;
+    QString dir = HttpFileServer::Priv::removeTrailingSlash(rootDir);
+    QString urlPath = HttpFileServer::Priv::removeTrailingSlash(urlRootPath, QChar{'/'});
     return [dir, urlPath](HttpServerRequest &request, HttpServerResponse &response) {
         return handleRequest(request, response, dir, urlPath);
     };

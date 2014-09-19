@@ -24,17 +24,18 @@ namespace Tufao {
 struct HttpFileServer::Priv
 {
     Priv(const QString &rootDir, const QString &rootPath) :
-        rootDir(rootDir), rootPath(rootPath)
+        rootDir(removeTrailingSlash(rootDir)), rootPath(removeTrailingSlash(rootPath, QChar{'/'}))
     {
-        if (rootDir.endsWith(QDir::separator()))
-            this->rootDir.remove(rootDir.size() - 1, 1);
-
-        if (rootPath.endsWith(QChar{'/'}))
-            this->rootPath.remove(rootPath.size() - 1, 1);
     }
 
     QString rootDir;
     QString rootPath;
+
+    static QString removeTrailingSlash(const QString &v, QChar slash = QDir::separator()) {
+        return v.endsWith(slash)
+            ? v.left(v.length()-1)
+            : v;
+    }
 };
 
 } // namespace Tufao
